@@ -1,0 +1,48 @@
+{
+  "name": "react-auto-complete-label",
+  "description": "Auto-complete and label tagging for React",
+  "version": "0.1.0",
+  "homepage": "https://www.accordium.com",
+  "author": "Mohammad Virandry",
+  "license": "MIT",
+  "dependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "rm -rf dist && sass src/lib/style/style.scss:src/lib/style/style.css --style compressed && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__ --no-comments"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "node-sass": "^4.10.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-debounce-input": "^3.2.0",
+    "react-dom": "^16.6.3",
+    "react-scripts": "2.1.1",
+    "sass": "^1.15.1"
+  },
+  "peerDependencies": {
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Accordium/react-auto-complete-label"
+  }
+}
