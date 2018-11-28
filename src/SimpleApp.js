@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import AutoCompleteLabel from './lib/components/AutoCompleteLabel';
 import './lib/style/style.scss';
-import { getLastRowWidth } from './lib';
+import { getLastRowWidth, toSuggestions } from './lib';
 
 export default class SimpleApp extends Component {
   constructor() {
     super();
     this.state = {
       value: '',
-      selectedLabels: [{ value: 'yoyoyoyo', title: 'wow wow', error: true }],
-      suggestions: [{ value: 'mvi@accordium.com', name: 'test caption' }, { value: 'virandry@gmail.com', name: 'Virandry' }],
+      selectedLabels: [{ value: 'smile@accordium.com', name: 'Hello Accordium', error: true }],
+      suggestions: [],
       containerWidth: 0,
       lastRowWidth: 0,
     };
@@ -21,7 +21,12 @@ export default class SimpleApp extends Component {
 
   componentDidMount() {
     if (this.lastRowWidth) {
-      setTimeout(this.setState({ lastRowWidth: this.lastRowWidth, containerWidth: this.containerWidth }), 100);
+      const listOfSuggestion = [
+        { emailAddress: 'good.thing@accordium.com', fullName: 'Trevor' },
+        { emailAddress: 'sample@accordium.com', fullName: 'The Sampleman' },
+      ];
+      const suggestions = toSuggestions(listOfSuggestion, { nameKey: 'fullName', valueKey: 'emailAddress' });
+      setTimeout(this.setState({ suggestions, lastRowWidth: this.lastRowWidth, containerWidth: this.containerWidth }), 100);
     }
   }
 
@@ -53,11 +58,11 @@ export default class SimpleApp extends Component {
     );
   }
 
-  onSelect({ value, title }) {
+  onSelect({ value, name }) {
     this.setState(
       prevState => {
         const selectedLabels = prevState.selectedLabels.slice();
-        selectedLabels.push({ value, title });
+        selectedLabels.push({ value, name });
         return { selectedLabels, suggestions: [], value: '' };
       },
       () => this.setState({ lastRowWidth: this.lastRowWidth, containerWidth: this.containerWidth })

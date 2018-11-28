@@ -7,13 +7,10 @@ export default class AutoCompleteInput extends Component {
     super(props);
     this.state = { activeIndex: null };
     this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.onSuggestionSelect = this.onSuggestionSelect.bind(this);
     this.inputRef = React.createRef();
     this.utilDivRef = React.createRef();
-  }
-
-  componentDidMount() {
-    this.tmpInputWidth = this.utilDivRef.current.clientWidth; // in px
   }
 
   get inputWrapperStyle() {
@@ -40,7 +37,6 @@ export default class AutoCompleteInput extends Component {
   }
 
   handleKeyUp(e) {
-    this.tmpInputWidth = this.utilDivRef.current.clientWidth; // in px
     if (e.keyCode === KEYS.ENTER && this.state.activeIndex !== null) {
       const selectedSuggestion = this.props.suggestions[this.state.activeIndex];
       this.props.onSelect({ value: selectedSuggestion.value, title: selectedSuggestion.caption });
@@ -56,10 +52,6 @@ export default class AutoCompleteInput extends Component {
         this.props.onSelect({ value: selectedValue });
         this.setState({ activeIndex: null });
       }
-      return;
-    }
-    if (e.keyCode === KEYS.BACKSPACE && this.props.value === '') {
-      this.props.onRemove && this.props.onRemove(this.props.lastSelectedLabelsIndex);
       return;
     }
     if (this.props.suggestions.length > 0) {
@@ -86,6 +78,13 @@ export default class AutoCompleteInput extends Component {
     }
   }
 
+  handleKeyDown(e) {
+    if (e.keyCode === KEYS.BACKSPACE && this.props.value === '') {
+      this.props.onRemove && this.props.onRemove(this.props.lastSelectedLabelsIndex);
+      return;
+    }
+  }
+
   onSuggestionSelect(suggestion) {
     this.props.onSelect({ value: suggestion.value, title: suggestion.name });
     this.setState({ activeIndex: null });
@@ -104,6 +103,7 @@ export default class AutoCompleteInput extends Component {
             placeholder={this.props.placeholder && this.props.placeholder}
             onChange={e => this.props.onChange(e.target.value)}
             onKeyUp={this.handleKeyUp}
+            onKeyDown={this.handleKeyDown}
             onBlur={() => this.setState({ activeIndex: null })}
           />
           <div ref={this.utilDivRef} className="input-field" style={this.utilDivStyle}>

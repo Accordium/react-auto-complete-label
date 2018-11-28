@@ -19,7 +19,6 @@ var SelectedLabels = function (_Component) {
     key: "render",
     value: function render() {
       var nonMandatoryProps = {
-        hasError: this.props.hasError,
         onRemove: this.props.onRemove,
         removeText: this.props.removeText,
         labelClassNames: this.props.labelClassNames
@@ -29,7 +28,8 @@ var SelectedLabels = function (_Component) {
           key: index,
           labelIndex: index,
           value: label.value,
-          title: label.title
+          name: label.name,
+          error: label.error
         }, nonMandatoryProps));
       });
     }

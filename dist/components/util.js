@@ -62,12 +62,10 @@ export function getLastRowWidth(el) {
   var lastRowWidth = 0;
 
   for (var i = 0; i < childrenWidth.length; i++) {
-    console.log('childrenWidth[i]: ', childrenWidth[i]);
     lastRowWidth += childrenWidth[i];
     if (lastRowWidth > containerWidth) lastRowWidth = childrenWidth[i];
   }
 
-  console.log('lastRowWidth: ', lastRowWidth);
   return lastRowWidth;
 }
 

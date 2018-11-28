@@ -19,13 +19,12 @@ var Label = function (_Component) {
     value: function render() {
       var _this = this;
 
-      console.log(this.props.error);
       return React.createElement("div", {
         className: "selected-label-wrapper"
       }, React.createElement("span", {
-        title: this.props.title && this.props.title,
+        title: this.props.name ? this.props.value : undefined,
         className: "selected-label".concat(this.props.labelClassNames ? ' ' + this.props.labelClassNames : '').concat(this.props.error ? ' error' : '')
-      }, this.props.value, this.showRemoveButton && React.createElement("button", {
+      }, this.props.name ? this.props.name : this.props.value, this.showRemoveButton && React.createElement("button", {
         onClick: function onClick() {
           return _this.props.onRemove(_this.props.labelIndex);
         },
