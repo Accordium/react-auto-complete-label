@@ -20,6 +20,7 @@ var AutoCompleteInput = function (_Component) {
       activeIndex: null
     };
     _this.handleKeyUp = _this.handleKeyUp.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onSuggestionSelect = _this.onSuggestionSelect.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.inputRef = React.createRef();
     _this.utilDivRef = React.createRef();
@@ -27,15 +28,8 @@ var AutoCompleteInput = function (_Component) {
   }
 
   _createClass(AutoCompleteInput, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.tmpInputWidth = this.utilDivRef.current.clientWidth;
-    }
-  }, {
     key: "handleKeyUp",
     value: function handleKeyUp(e) {
-      this.tmpInputWidth = this.utilDivRef.current.clientWidth;
-
       if (e.keyCode === KEYS.ENTER && this.state.activeIndex !== null) {
         var selectedSuggestion = this.props.suggestions[this.state.activeIndex];
         this.props.onSelect({
@@ -64,11 +58,6 @@ var AutoCompleteInput = function (_Component) {
         return;
       }
 
-      if (e.keyCode === KEYS.BACKSPACE && this.props.value === '') {
-        this.props.onRemove && this.props.onRemove(this.props.lastSelectedLabelsIndex);
-        return;
-      }
-
       if (this.props.suggestions.length > 0) {
         var lastSuggestionsIndex = this.props.suggestions.length - 1;
         var activeIndex = this.state.activeIndex;
@@ -94,6 +83,14 @@ var AutoCompleteInput = function (_Component) {
         this.setState({
           activeIndex: activeIndex
         });
+      }
+    }
+  }, {
+    key: "handleKeyDown",
+    value: function handleKeyDown(e) {
+      if (e.keyCode === KEYS.BACKSPACE && this.props.value === '') {
+        this.props.onRemove && this.props.onRemove(this.props.lastSelectedLabelsIndex);
+        return;
       }
     }
   }, {
@@ -126,6 +123,7 @@ var AutoCompleteInput = function (_Component) {
           return _this2.props.onChange(e.target.value);
         },
         onKeyUp: this.handleKeyUp,
+        onKeyDown: this.handleKeyDown,
         onBlur: function onBlur() {
           return _this2.setState({
             activeIndex: null
