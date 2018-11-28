@@ -19,7 +19,11 @@ class AutoCompleteLabel extends Component {
             </label>
           )}
           <div className="label-input-wrapper" ref={this.props.forwardedRef}>
-            <SelectedLabels selectedLabels={this.props.selectedLabels} onRemove={this.props.onRemove} labelClassNames="grey-200" />
+            <SelectedLabels
+              selectedLabels={this.props.selectedLabels}
+              onRemove={this.props.onRemove}
+              labelClassNames={this.props.selectedLabelClassNames}
+            />
             <AutoCompleteInput
               onChange={this.props.onInputChange}
               onSelect={this.props.onSelect}
@@ -48,6 +52,11 @@ AutoCompleteLabel.propTypes = {
   onInputChange: PropTypes.func.isRequired,
   onRemove: PropTypes.func,
   onSelect: PropTypes.func.isRequired,
-  selectedLabels: PropTypes.array,
-  suggestions: PropTypes.array,
+  selectedLabels: PropTypes.arrayOf(
+    PropTypes.shape({ value: PropTypes.string.isRequired, name: PropTypes.string })
+  ).isRequired,
+  selectedLabelClassNames: PropTypes.string,
+  suggestions: PropTypes.arrayOf(
+    PropTypes.shape({ value: PropTypes.string.isRequired, name: PropTypes.string })
+  ).isRequired,
 };

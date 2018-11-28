@@ -31,7 +31,7 @@ var AutoCompleteLabel = function (_Component) {
       }, React.createElement(SelectedLabels, {
         selectedLabels: this.props.selectedLabels,
         onRemove: this.props.onRemove,
-        labelClassNames: "grey-200"
+        labelClassNames: this.props.selectedLabelClassNames
       }), React.createElement(AutoCompleteInput, {
         onChange: this.props.onInputChange,
         onSelect: this.props.onSelect,

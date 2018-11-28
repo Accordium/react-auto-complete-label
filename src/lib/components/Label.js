@@ -7,16 +7,15 @@ export default class Label extends Component {
   }
 
   render() {
-    console.log(this.props.error);
     return (
       <div className="selected-label-wrapper">
         <span
-          title={this.props.title && this.props.title}
+          title={this.props.name ? this.props.value : undefined}
           className={`selected-label${this.props.labelClassNames ? ' ' + this.props.labelClassNames : ''}${
             this.props.error ? ' error' : ''
           }`}
         >
-          {this.props.value}
+          {this.props.name ? this.props.name : this.props.value}
           {this.showRemoveButton && (
             <button onClick={() => this.props.onRemove(this.props.labelIndex)} className="remove-label">
               {this.props.removeText}
@@ -34,7 +33,7 @@ Label.propTypes = {
   labelIndex: PropTypes.number,
   onRemove: PropTypes.func,
   removeText: PropTypes.string,
-  title: PropTypes.string,
+  name: PropTypes.string,
   value: PropTypes.string.isRequired,
 };
 

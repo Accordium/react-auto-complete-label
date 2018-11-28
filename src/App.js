@@ -10,8 +10,11 @@ export default class App extends Component {
     super();
     this.state = {
       value: '',
-      selectedLabels: [{ value: 'yoyoyoyo', title: 'wow wow', error: true }],
-      suggestions: [{ value: 'mvi@accordium.com', name: 'test caption' }, { value: 'virandry@gmail.com', name: 'Virandry' }],
+      selectedLabels: [{ value: 'smile@accordium.com', name: 'Hello Accordium', error: true }],
+      suggestions: [
+        { value: 'good.thing@accordium.com', name: 'Trevor' },
+        { value: 'sample@accordium.com', name: 'The Sampleman' },
+      ],
       lastRowWidth: 0,
       containerWidth: 0,
     };
