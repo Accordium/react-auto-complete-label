@@ -18,7 +18,7 @@ export default class AutoCompleteInput extends Component {
       if (this.props.containerWidth) {
         const inputWidthLimit = this.props.containerWidth * 0.2;
         const inputWidth = this.props.containerWidth - (this.props.lastRowWidth + 10);
-        if (inputWidth < inputWidthLimit ) return { width: '100%', minWidth: `${this.props.inputMinWidth}px` };
+        if (inputWidth < inputWidthLimit) return { width: '100%', minWidth: `${this.props.inputMinWidth}px` };
       }
       return { width: `calc(100% - ${this.props.lastRowWidth + 10}px)`, minWidth: `${this.props.inputMinWidth}px` };
     }
@@ -39,7 +39,11 @@ export default class AutoCompleteInput extends Component {
   handleKeyUp(e) {
     if (e.keyCode === KEYS.ENTER && this.state.activeIndex !== null) {
       const selectedSuggestion = this.props.suggestions[this.state.activeIndex];
-      this.props.onSelect({ value: selectedSuggestion.value, title: selectedSuggestion.caption });
+      this.props.onSelect({
+        value: selectedSuggestion.value,
+        name: selectedSuggestion.name,
+        optionalObject: selectedSuggestion.optionalObject,
+      });
       this.setState({ activeIndex: null });
       return;
     }
@@ -86,7 +90,7 @@ export default class AutoCompleteInput extends Component {
   }
 
   onSuggestionSelect(suggestion) {
-    this.props.onSelect({ value: suggestion.value, title: suggestion.name });
+    this.props.onSelect({ value: suggestion.value, name: suggestion.name, optionalObject: suggestion.optionalObject });
     this.setState({ activeIndex: null });
   }
 

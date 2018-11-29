@@ -34,7 +34,8 @@ var AutoCompleteInput = function (_Component) {
         var selectedSuggestion = this.props.suggestions[this.state.activeIndex];
         this.props.onSelect({
           value: selectedSuggestion.value,
-          title: selectedSuggestion.caption
+          name: selectedSuggestion.name,
+          optionalObject: selectedSuggestion.optionalObject
         });
         this.setState({
           activeIndex: null
@@ -98,7 +99,8 @@ var AutoCompleteInput = function (_Component) {
     value: function onSuggestionSelect(suggestion) {
       this.props.onSelect({
         value: suggestion.value,
-        title: suggestion.name
+        name: suggestion.name,
+        optionalObject: suggestion.optionalObject
       });
       this.setState({
         activeIndex: null
