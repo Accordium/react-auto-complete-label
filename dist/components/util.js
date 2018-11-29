@@ -1,5 +1,6 @@
 export function toSuggestions(list, _ref) {
   var nameKey = _ref.nameKey,
+      nameKey2 = _ref.nameKey2,
       valueKey = _ref.valueKey;
   var suggestions = [];
   var _iteratorNormalCompletion = true;
@@ -9,9 +10,12 @@ export function toSuggestions(list, _ref) {
   try {
     for (var _iterator = list[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var items = _step.value;
+      var name = items[nameKey];
+      if (nameKey2) name = items[nameKey] + ' ' + items[nameKey2];
       suggestions.push({
-        name: items[nameKey],
-        value: items[valueKey]
+        name: name,
+        value: items[valueKey],
+        optionalObject: items
       });
     }
   } catch (err) {
