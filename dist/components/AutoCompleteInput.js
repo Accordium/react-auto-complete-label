@@ -1,9 +1,9 @@
-import _classCallCheck from "/home/virandry/accordium/project/react-auto-complete-label/node_modules/@babel/runtime/helpers/esm/classCallCheck";
-import _createClass from "/home/virandry/accordium/project/react-auto-complete-label/node_modules/@babel/runtime/helpers/esm/createClass";
-import _possibleConstructorReturn from "/home/virandry/accordium/project/react-auto-complete-label/node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn";
-import _getPrototypeOf from "/home/virandry/accordium/project/react-auto-complete-label/node_modules/@babel/runtime/helpers/esm/getPrototypeOf";
-import _inherits from "/home/virandry/accordium/project/react-auto-complete-label/node_modules/@babel/runtime/helpers/esm/inherits";
-import _assertThisInitialized from "/home/virandry/accordium/project/react-auto-complete-label/node_modules/@babel/runtime/helpers/esm/assertThisInitialized";
+import _classCallCheck from "@babel/runtime/helpers/esm/classCallCheck";
+import _createClass from "@babel/runtime/helpers/esm/createClass";
+import _possibleConstructorReturn from "@babel/runtime/helpers/esm/possibleConstructorReturn";
+import _getPrototypeOf from "@babel/runtime/helpers/esm/getPrototypeOf";
+import _inherits from "@babel/runtime/helpers/esm/inherits";
+import _assertThisInitialized from "@babel/runtime/helpers/esm/assertThisInitialized";
 import React, { Component, Fragment } from 'react';
 import { KEYS } from './constants';
 
