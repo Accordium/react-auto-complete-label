@@ -22,10 +22,10 @@ export default class SimpleApp extends Component {
   componentDidMount() {
     if (this.lastRowWidth) {
       const listOfSuggestion = [
-        { emailAddress: 'good.thing@accordium.com', fullName: 'Trevor' },
-        { emailAddress: 'sample@accordium.com', fullName: 'The Sampleman' },
+        { emailAddress: 'good.thing@accordium.com', firstName: 'Trevor', lastName: 'Noah', optionalObject: { firstName: 'Trevor', lastName: 'Noah' } },
+        { emailAddress: 'sample@accordium.com', firstName: 'Samnple', lastName: 'Man' },
       ];
-      const suggestions = toSuggestions(listOfSuggestion, { nameKey: 'fullName', valueKey: 'emailAddress' });
+      const suggestions = toSuggestions(listOfSuggestion, { nameKey: 'firstName', nameKey2: 'lastName', valueKey: 'emailAddress' });
       setTimeout(this.setState({ suggestions, lastRowWidth: this.lastRowWidth, containerWidth: this.containerWidth }), 100);
     }
   }
@@ -58,11 +58,11 @@ export default class SimpleApp extends Component {
     );
   }
 
-  onSelect({ value, name }) {
+  onSelect({ value, name, optionalObject }) {
     this.setState(
       prevState => {
         const selectedLabels = prevState.selectedLabels.slice();
-        selectedLabels.push({ value, name });
+        selectedLabels.push({ value, name, optionalObject });
         return { selectedLabels, suggestions: [], value: '' };
       },
       () => this.setState({ lastRowWidth: this.lastRowWidth, containerWidth: this.containerWidth })

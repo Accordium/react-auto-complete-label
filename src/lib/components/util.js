@@ -1,9 +1,12 @@
-export function toSuggestions(list, { nameKey, valueKey }) {
+export function toSuggestions(list, { nameKey, nameKey2, valueKey }) {
   const suggestions = [];
   for (const items of list) {
+    let name = items[nameKey];
+    if (nameKey2) name = items[nameKey] + ' ' + items[nameKey2];
     suggestions.push({
-      name: items[nameKey],
+      name,
       value: items[valueKey],
+      optionalObject: items,
     });
   }
   return suggestions;
@@ -27,5 +30,5 @@ export function getLastRowWidth(el) {
 }
 
 function hasClass(element, className) {
-  return (' ' + element.className + ' ').indexOf(' ' + className+ ' ') > -1;
+  return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
 }
