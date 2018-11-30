@@ -1,7 +1,7 @@
 {
   "name": "react-auto-complete-label",
   "description": "Auto-complete and label tagging for React",
-  "version": "0.1.2",
+  "version": "0.1.5",
   "homepage": "https://www.accordium.com",
   "author": "Mohammad Virandry",
   "license": "MIT",
@@ -29,7 +29,8 @@
     "react-debounce-input": "^3.2.0",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1",
-    "sass": "^1.15.1"
+    "sass": "^1.15.1",
+    "semantic-release-cli": "^4.0.11"
   },
   "peerDependencies": {
     "react": "^16.6.3",

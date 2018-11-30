@@ -45,7 +45,7 @@ export function getLastRowWidth(el) {
   try {
     for (var _iterator2 = el.childNodes[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
       var child = _step2.value;
-      if (hasClass(child, 'auto-complete-input') || hasClass(child, 'suggestions')) continue;
+      if (hasClass(child, 'React_autocomplete_label__auto-complete-input-wrapper') || hasClass(child, 'React_autocomplete_label__suggestions')) continue;
       childrenWidth.push(child.clientWidth);
     }
   } catch (err) {
@@ -63,11 +63,17 @@ export function getLastRowWidth(el) {
     }
   }
 
+  console.log(childrenWidth);
   var lastRowWidth = 0;
+  console.log('containerWidth: ', containerWidth);
 
   for (var i = 0; i < childrenWidth.length; i++) {
+    console.log('lastRowWidth before: ', lastRowWidth);
     lastRowWidth += childrenWidth[i];
+    console.log('lastRowWidth after1: ', lastRowWidth);
+    console.log('childrenWidth[i]: ', childrenWidth[i]);
     if (lastRowWidth > containerWidth) lastRowWidth = childrenWidth[i];
+    console.log('lastRowWidth after2: ', lastRowWidth);
   }
 
   return lastRowWidth;

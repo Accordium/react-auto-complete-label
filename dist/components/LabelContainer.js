@@ -18,7 +18,7 @@ var LabelContainer = function (_Component) {
     key: "render",
     value: function render() {
       return React.createElement("div", {
-        className: "auto-complete-label container"
+        className: "React_autocomplete_label__container"
       }, this.props.children);
     }
   }]);
