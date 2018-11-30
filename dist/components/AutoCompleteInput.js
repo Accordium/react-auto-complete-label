@@ -91,7 +91,6 @@ var AutoCompleteInput = function (_Component) {
     value: function handleKeyDown(e) {
       if (e.keyCode === KEYS.BACKSPACE && this.props.value === '') {
         this.props.onRemove && this.props.onRemove(this.props.lastSelectedLabelsIndex);
-        return;
       }
     }
   }, {
@@ -111,7 +110,7 @@ var AutoCompleteInput = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return React.createElement(Fragment, null, React.createElement("div", {
+      return React.createElement(Fragment, null, !this.props.readOnly && React.createElement("div", {
         className: "React_autocomplete_label__auto-complete-input-wrapper",
         style: this.inputWrapperStyle
       }, React.createElement("input", {
@@ -205,5 +204,6 @@ AutoCompleteInput.defaultProps = {
   placeholder: '',
   inputId: 'auto-input-field',
   inputMinWidth: 150,
-  containerWidth: 0
+  containerWidth: 0,
+  readOnly: false
 };

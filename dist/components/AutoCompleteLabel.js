@@ -29,7 +29,8 @@ var AutoCompleteLabel = function (_Component) {
       }, React.createElement(SelectedLabels, {
         selectedLabels: this.props.selectedLabels,
         onRemove: this.props.onRemove,
-        labelClassNames: this.props.selectedLabelClassNames
+        labelClassNames: this.props.selectedLabelClassNames,
+        readOnly: this.props.readOnly
       }), React.createElement(AutoCompleteInput, {
         onChange: this.props.onInputChange,
         onSelect: this.props.onSelect,
@@ -38,7 +39,8 @@ var AutoCompleteLabel = function (_Component) {
         value: this.props.inputValue,
         suggestions: this.props.suggestions,
         containerWidth: this.props.containerWidth,
-        lastRowWidth: this.props.lastRowWidth
+        lastRowWidth: this.props.lastRowWidth,
+        readOnly: this.props.readOnly
       })));
     }
   }, {

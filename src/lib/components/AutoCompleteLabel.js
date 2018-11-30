@@ -22,6 +22,7 @@ class AutoCompleteLabel extends Component {
             selectedLabels={this.props.selectedLabels}
             onRemove={this.props.onRemove}
             labelClassNames={this.props.selectedLabelClassNames}
+            readOnly={this.props.readOnly}
           />
           <AutoCompleteInput
             onChange={this.props.onInputChange}
@@ -32,6 +33,7 @@ class AutoCompleteLabel extends Component {
             suggestions={this.props.suggestions}
             containerWidth={this.props.containerWidth}
             lastRowWidth={this.props.lastRowWidth}
+            readOnly={this.props.readOnly}
           />
         </div>
       </LabelContainer>
@@ -50,6 +52,7 @@ AutoCompleteLabel.propTypes = {
   onInputChange: PropTypes.func.isRequired,
   onRemove: PropTypes.func,
   onSelect: PropTypes.func.isRequired,
+  readOnly: PropTypes.bool,
   selectedLabels: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired, name: PropTypes.string })).isRequired,
   selectedLabelClassNames: PropTypes.string,
   suggestions: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired, name: PropTypes.string })).isRequired,

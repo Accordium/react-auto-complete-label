@@ -19,7 +19,7 @@ var SelectedLabels = function (_Component) {
     key: "render",
     value: function render() {
       var nonMandatoryProps = {
-        onRemove: this.props.onRemove,
+        onRemove: !!this.props.readOnly ? undefined : this.props.onRemove,
         removeText: this.props.removeText,
         labelClassNames: this.props.labelClassNames
       };
@@ -39,3 +39,6 @@ var SelectedLabels = function (_Component) {
 }(Component);
 
 export { SelectedLabels as default };
+SelectedLabels.defaultProps = {
+  readonly: false
+};
