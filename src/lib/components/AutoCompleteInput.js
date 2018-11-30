@@ -85,7 +85,6 @@ export default class AutoCompleteInput extends Component {
   handleKeyDown(e) {
     if (e.keyCode === KEYS.BACKSPACE && this.props.value === '') {
       this.props.onRemove && this.props.onRemove(this.props.lastSelectedLabelsIndex);
-      return;
     }
   }
 
@@ -97,23 +96,25 @@ export default class AutoCompleteInput extends Component {
   render() {
     return (
       <Fragment>
-        <div className="React_autocomplete_label__auto-complete-input-wrapper" style={this.inputWrapperStyle}>
-          <input
-            ref={this.inputRef}
-            id={this.props.inputId}
-            type="text"
-            className={`React_autocomplete_label__input-field${!!this.props.error ? ' error' : ''}`}
-            value={this.props.value}
-            placeholder={this.props.placeholder && this.props.placeholder}
-            onChange={e => this.props.onChange(e.target.value)}
-            onKeyUp={this.handleKeyUp}
-            onKeyDown={this.handleKeyDown}
-            onBlur={() => this.setState({ activeIndex: null })}
-          />
-          <div ref={this.utilDivRef} className="React_autocomplete_label__input-field" style={this.utilDivStyle}>
-            {this.props.value}
+        {!this.props.readOnly && (
+          <div className="React_autocomplete_label__auto-complete-input-wrapper" style={this.inputWrapperStyle}>
+            <input
+              ref={this.inputRef}
+              id={this.props.inputId}
+              type="text"
+              className={`React_autocomplete_label__input-field${!!this.props.error ? ' error' : ''}`}
+              value={this.props.value}
+              placeholder={this.props.placeholder && this.props.placeholder}
+              onChange={e => this.props.onChange(e.target.value)}
+              onKeyUp={this.handleKeyUp}
+              onKeyDown={this.handleKeyDown}
+              onBlur={() => this.setState({ activeIndex: null })}
+            />
+            <div ref={this.utilDivRef} className="React_autocomplete_label__input-field" style={this.utilDivStyle}>
+              {this.props.value}
+            </div>
           </div>
-        </div>
+        )}
         {this.props.suggestions.length > 0 && (
           <ul className="React_autocomplete_label__suggestions">
             {this.props.suggestions.map(
@@ -153,6 +154,7 @@ AutoCompleteInput.propTypes = {
   onRemove: PropTypes.func,
   onSelect: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
+  readOnly: PropTypes.bool,
   suggestions: PropTypes.arrayOf(
     PropTypes.shape({ value: PropTypes.string.isRequired, name: PropTypes.string, optionalObject: PropTypes.object })
   ).isRequired,
@@ -167,4 +169,5 @@ AutoCompleteInput.defaultProps = {
   inputId: 'auto-input-field',
   inputMinWidth: 150,
   containerWidth: 0,
+  readOnly: false,
 };

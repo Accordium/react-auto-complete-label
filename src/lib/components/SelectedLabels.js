@@ -5,7 +5,7 @@ import Label from './Label';
 export default class SelectedLabels extends Component {
   render() {
     const nonMandatoryProps = {
-      onRemove: this.props.onRemove,
+      onRemove: !!this.props.readOnly ? undefined : this.props.onRemove,
       removeText: this.props.removeText,
       labelClassNames: this.props.labelClassNames,
     };
@@ -18,9 +18,14 @@ export default class SelectedLabels extends Component {
 SelectedLabels.propTypes = {
   labelClassNames: PropTypes.string,
   onRemove: PropTypes.any,
+  readOnly: PropTypes.bool,
   removeText: PropTypes.any,
   selectedLabels: PropTypes.arrayOf(
     PropTypes.shape({ value: PropTypes.string.isRequired, name: PropTypes.string, error: PropTypes.bool })
   ).isRequired,
   title: PropTypes.any,
+};
+
+SelectedLabels.defaultProps = {
+  readonly: false,
 };

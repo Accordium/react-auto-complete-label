@@ -83,6 +83,7 @@ export default class SimpleApp extends Component {
           suggestions={this.state.suggestions}
           containerWidth={this.state.containerWidth}
           lastRowWidth={this.state.lastRowWidth}
+          readOnly
         />
       </div>
     );
