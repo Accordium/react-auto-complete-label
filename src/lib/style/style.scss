@@ -1,5 +1,113 @@
-@import "_colors";
-@import "_general";
-@import "_selected-labels";
-@import "_auto-complete-input";
-@import "_suggestions";
+.React_autocomplete_label__container {
+  & > .React_autocomplete_label__label {
+    height: 50px;
+    width: 80px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: #b0b7c1;
+    pointer-events: none;
+    float:left;
+  }
+  .React_autocomplete_label__label-input-wrapper {
+    float: right;
+    width: calc(100% - 80px);
+  }
+  .React_autocomplete_label__selected-label-wrapper {
+    display: inline-flex;
+    .React_autocomplete_label__selected-label{
+      display: inline-block;
+      line-height: 1;
+      vertical-align: baseline;
+      margin: .14285714em .14285714em;
+      margin-right: 0.142857em;
+      background-color: #e3e3e3;
+      background-image: none;
+      padding: .5833em .833em;
+      color: rgba(0,0,0,.6);
+      text-transform: none;
+      font-weight: 700;
+      border: 0 solid transparent;
+      border-radius: .28571429rem;
+      -webkit-transition: background .1s ease;
+      transition: background .1s ease;
+    }
+    .React_autocomplete_label__remove-label {
+      cursor: pointer;
+      margin-right: 0;
+      margin-left: .5em;
+      font-size: .92857143em;
+      opacity: .5;
+      -webkit-transition: background .1s ease;
+      transition: background .1s ease;
+      width: auto;
+      border: none;
+    }
+  }
+  .React_autocomplete_label__auto-complete-input-wrapper {
+    display: inline-flex;
+    .React_autocomplete_label__input-field {
+      width: 100%;
+      border: 0 solid transparent;
+      display: inline-block;
+      line-height: 1;
+      vertical-align: baseline;
+      margin: 0 .14285714em;
+      margin-right: 0.142857em;
+      padding: .5833em .833em;
+      -webkit-transition: background .1s ease;
+      transition: background .1s ease;
+    }
+  }
+  ul.React_autocomplete_label__suggestions {
+    transition: all .15s cubic-bezier(.4, 0, .6, 1);
+    top: 60px;
+    left: 0;
+    width: 100%;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background: #fff;
+    position: absolute;
+    right: 0;
+    filter: drop-shadow(0 15px 20px rgba(28, 47, 73, .1));
+    z-index: 4;
+    font-weight: 400;
+    text-align: left;
+    list-style-type: none;
+    li.React_autocomplete_label__suggestion-item {
+      cursor: pointer !important;
+      padding: 15px;
+      border: none;
+      border-bottom: 1px solid #fafafa;
+      width: 100%;
+      text-align: left;
+      background: #fff !important;
+      &:focus {
+        outline: none;
+      }
+      &:hover, &.active {
+        .suggestion-name {
+          color: rgb(23, 192, 247) !important;
+          cursor: pointer;
+        }
+      }
+      .React_autocomplete_label__suggestion-name {
+        font-weight: 400;
+        font-size: 12px;
+        display: block;
+        color: #5a788f !important;
+        position: relative;
+        top: 3px;
+      }
+      .React_autocomplete_label__suggestion-value {
+        font-weight: 200;
+        font-size: 12px;
+        display: block;
+        color: #5a788f !important;
+        position: relative;
+        top: 3px;
+      }
+    }
+  }
+}

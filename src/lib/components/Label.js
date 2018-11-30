@@ -8,16 +8,16 @@ export default class Label extends Component {
 
   render() {
     return (
-      <div className="selected-label-wrapper">
+      <div className="React_autocomplete_label__selected-label-wrapper">
         <span
           title={this.props.name ? this.props.value : undefined}
-          className={`selected-label${this.props.labelClassNames ? ' ' + this.props.labelClassNames : ''}${
+          className={`React_autocomplete_label__selected-label${this.props.labelClassNames ? ' ' + this.props.labelClassNames : ''}${
             this.props.error ? ' error' : ''
           }`}
         >
           {this.props.name ? this.props.name : this.props.value}
           {this.showRemoveButton && (
-            <button onClick={() => this.props.onRemove(this.props.labelIndex)} className="remove-label">
+            <button onClick={() => this.props.onRemove(this.props.labelIndex)} className="React_autocomplete_label__remove-label">
               {this.props.removeText}
             </button>
           )}

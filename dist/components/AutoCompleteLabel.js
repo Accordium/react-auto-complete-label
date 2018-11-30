@@ -20,13 +20,11 @@ var AutoCompleteLabel = function (_Component) {
   _createClass(AutoCompleteLabel, [{
     key: "render",
     value: function render() {
-      return React.createElement("div", {
-        className: "auto-complete-label container"
-      }, React.createElement(LabelContainer, null, this.props.keyText && React.createElement("label", {
-        className: "label",
+      return React.createElement(LabelContainer, null, this.props.keyText && React.createElement("label", {
+        className: "React_autocomplete_label__label",
         htmlFor: "auto-input-field"
       }, this.props.keyText), React.createElement("div", {
-        className: "label-input-wrapper",
+        className: "React_autocomplete_label__label-input-wrapper",
         ref: this.props.forwardedRef
       }, React.createElement(SelectedLabels, {
         selectedLabels: this.props.selectedLabels,
@@ -41,7 +39,7 @@ var AutoCompleteLabel = function (_Component) {
         suggestions: this.props.suggestions,
         containerWidth: this.props.containerWidth,
         lastRowWidth: this.props.lastRowWidth
-      }))));
+      })));
     }
   }, {
     key: "lastSelectedLabelsIndex",

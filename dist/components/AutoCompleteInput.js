@@ -112,13 +112,13 @@ var AutoCompleteInput = function (_Component) {
       var _this2 = this;
 
       return React.createElement(Fragment, null, React.createElement("div", {
-        className: "auto-complete-input wrapper",
+        className: "React_autocomplete_label__auto-complete-input-wrapper",
         style: this.inputWrapperStyle
       }, React.createElement("input", {
         ref: this.inputRef,
         id: this.props.inputId,
         type: "text",
-        className: "input-field".concat(!!this.props.error ? ' error' : ''),
+        className: "React_autocomplete_label__input-field".concat(!!this.props.error ? ' error' : ''),
         value: this.props.value,
         placeholder: this.props.placeholder && this.props.placeholder,
         onChange: function onChange(e) {
@@ -133,27 +133,27 @@ var AutoCompleteInput = function (_Component) {
         }
       }), React.createElement("div", {
         ref: this.utilDivRef,
-        className: "input-field",
+        className: "React_autocomplete_label__input-field",
         style: this.utilDivStyle
       }, this.props.value)), this.props.suggestions.length > 0 && React.createElement("ul", {
-        className: "suggestions"
+        className: "React_autocomplete_label__suggestions"
       }, this.props.suggestions.map(function (suggestion, index) {
         return React.createElement("li", {
-          className: "suggestion-item".concat(index === _this2.state.activeIndex ? ' active' : '', " "),
+          className: "React_autocomplete_label__suggestion-item".concat(index === _this2.state.activeIndex ? ' active' : '', " "),
           key: index,
           onClick: function onClick() {
             return _this2.onSuggestionSelect(suggestion);
           }
         }, suggestion.avatarUrl && React.createElement("div", {
-          className: "suggestion-avatar-wrapper"
+          className: "React_autocomplete_label__suggestion-avatar-wrapper"
         }, React.createElement("img", {
-          className: "suggestion-avatar",
+          className: "React_autocomplete_label__suggestion-avatar",
           src: suggestion.avatarUrl,
           alt: suggestion.value
         })), React.createElement("div", {
-          className: "suggestion-name"
+          className: "React_autocomplete_label__suggestion-name"
         }, suggestion.name), suggestion.value && React.createElement("div", {
-          className: "suggestion-value"
+          className: "React_autocomplete_label__suggestion-value"
         }, suggestion.value));
       }, this)));
     }
