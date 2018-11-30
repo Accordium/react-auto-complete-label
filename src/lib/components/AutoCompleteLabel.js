@@ -11,32 +11,30 @@ class AutoCompleteLabel extends Component {
 
   render() {
     return (
-      <div className="auto-complete-label container">
-        <LabelContainer>
-          {this.props.keyText && (
-            <label className="label" htmlFor="auto-input-field">
-              {this.props.keyText}
-            </label>
-          )}
-          <div className="label-input-wrapper" ref={this.props.forwardedRef}>
-            <SelectedLabels
-              selectedLabels={this.props.selectedLabels}
-              onRemove={this.props.onRemove}
-              labelClassNames={this.props.selectedLabelClassNames}
-            />
-            <AutoCompleteInput
-              onChange={this.props.onInputChange}
-              onSelect={this.props.onSelect}
-              onRemove={this.props.onRemove}
-              lastSelectedLabelsIndex={this.lastSelectedLabelsIndex}
-              value={this.props.inputValue}
-              suggestions={this.props.suggestions}
-              containerWidth={this.props.containerWidth}
-              lastRowWidth={this.props.lastRowWidth}
-            />
-          </div>
-        </LabelContainer>
-      </div>
+      <LabelContainer>
+        {this.props.keyText && (
+          <label className="React_autocomplete_label__label" htmlFor="auto-input-field">
+            {this.props.keyText}
+          </label>
+        )}
+        <div className="React_autocomplete_label__label-input-wrapper" ref={this.props.forwardedRef}>
+          <SelectedLabels
+            selectedLabels={this.props.selectedLabels}
+            onRemove={this.props.onRemove}
+            labelClassNames={this.props.selectedLabelClassNames}
+          />
+          <AutoCompleteInput
+            onChange={this.props.onInputChange}
+            onSelect={this.props.onSelect}
+            onRemove={this.props.onRemove}
+            lastSelectedLabelsIndex={this.lastSelectedLabelsIndex}
+            value={this.props.inputValue}
+            suggestions={this.props.suggestions}
+            containerWidth={this.props.containerWidth}
+            lastRowWidth={this.props.lastRowWidth}
+          />
+        </div>
+      </LabelContainer>
     );
   }
 }
@@ -52,11 +50,7 @@ AutoCompleteLabel.propTypes = {
   onInputChange: PropTypes.func.isRequired,
   onRemove: PropTypes.func,
   onSelect: PropTypes.func.isRequired,
-  selectedLabels: PropTypes.arrayOf(
-    PropTypes.shape({ value: PropTypes.string.isRequired, name: PropTypes.string })
-  ).isRequired,
+  selectedLabels: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired, name: PropTypes.string })).isRequired,
   selectedLabelClassNames: PropTypes.string,
-  suggestions: PropTypes.arrayOf(
-    PropTypes.shape({ value: PropTypes.string.isRequired, name: PropTypes.string })
-  ).isRequired,
+  suggestions: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired, name: PropTypes.string })).isRequired,
 };

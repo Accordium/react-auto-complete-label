@@ -97,12 +97,12 @@ export default class AutoCompleteInput extends Component {
   render() {
     return (
       <Fragment>
-        <div className="auto-complete-input wrapper" style={this.inputWrapperStyle}>
+        <div className="React_autocomplete_label__auto-complete-input-wrapper" style={this.inputWrapperStyle}>
           <input
             ref={this.inputRef}
             id={this.props.inputId}
             type="text"
-            className={`input-field${!!this.props.error ? ' error' : ''}`}
+            className={`React_autocomplete_label__input-field${!!this.props.error ? ' error' : ''}`}
             value={this.props.value}
             placeholder={this.props.placeholder && this.props.placeholder}
             onChange={e => this.props.onChange(e.target.value)}
@@ -110,26 +110,26 @@ export default class AutoCompleteInput extends Component {
             onKeyDown={this.handleKeyDown}
             onBlur={() => this.setState({ activeIndex: null })}
           />
-          <div ref={this.utilDivRef} className="input-field" style={this.utilDivStyle}>
+          <div ref={this.utilDivRef} className="React_autocomplete_label__input-field" style={this.utilDivStyle}>
             {this.props.value}
           </div>
         </div>
         {this.props.suggestions.length > 0 && (
-          <ul className="suggestions">
+          <ul className="React_autocomplete_label__suggestions">
             {this.props.suggestions.map(
               (suggestion, index) => (
                 <li
-                  className={`suggestion-item${index === this.state.activeIndex ? ' active' : ''} `}
+                  className={`React_autocomplete_label__suggestion-item${index === this.state.activeIndex ? ' active' : ''} `}
                   key={index}
                   onClick={() => this.onSuggestionSelect(suggestion)}
                 >
                   {suggestion.avatarUrl && (
-                    <div className="suggestion-avatar-wrapper">
-                      <img className="suggestion-avatar" src={suggestion.avatarUrl} alt={suggestion.value} />
+                    <div className="React_autocomplete_label__suggestion-avatar-wrapper">
+                      <img className="React_autocomplete_label__suggestion-avatar" src={suggestion.avatarUrl} alt={suggestion.value} />
                     </div>
                   )}
-                  <div className="suggestion-name">{suggestion.name}</div>
-                  {suggestion.value && <div className="suggestion-value">{suggestion.value}</div>}
+                  <div className="React_autocomplete_label__suggestion-name">{suggestion.name}</div>
+                  {suggestion.value && <div className="React_autocomplete_label__suggestion-value">{suggestion.value}</div>}
                 </li>
               ),
               this
@@ -153,7 +153,9 @@ AutoCompleteInput.propTypes = {
   onRemove: PropTypes.func,
   onSelect: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  suggestions: PropTypes.array,
+  suggestions: PropTypes.arrayOf(
+    PropTypes.shape({ value: PropTypes.string.isRequired, name: PropTypes.string, optionalObject: PropTypes.object })
+  ).isRequired,
   value: PropTypes.string.isRequired,
 };
 
