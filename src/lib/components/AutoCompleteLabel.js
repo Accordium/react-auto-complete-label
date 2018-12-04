@@ -28,6 +28,7 @@ class AutoCompleteLabel extends Component {
             onChange={this.props.onInputChange}
             onSelect={this.props.onSelect}
             onRemove={this.props.onRemove}
+            onPaste={this.props.onPaste}
             lastSelectedLabelsIndex={this.lastSelectedLabelsIndex}
             value={this.props.inputValue}
             suggestions={this.props.suggestions}
@@ -50,10 +51,11 @@ AutoCompleteLabel.propTypes = {
   keyText: PropTypes.string,
   lastRowWidth: PropTypes.any,
   onInputChange: PropTypes.func.isRequired,
+  onPaste: PropTypes.func,
   onRemove: PropTypes.func,
   onSelect: PropTypes.func.isRequired,
   readOnly: PropTypes.bool,
-  selectedLabels: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired, name: PropTypes.string })).isRequired,
   selectedLabelClassNames: PropTypes.string,
+  selectedLabels: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired, name: PropTypes.string })).isRequired,
   suggestions: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string.isRequired, name: PropTypes.string })).isRequired,
 };

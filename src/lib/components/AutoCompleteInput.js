@@ -8,6 +8,7 @@ export default class AutoCompleteInput extends Component {
     this.state = { activeIndex: null };
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleOnPaste = this.handleOnPaste.bind(this);
     this.onSuggestionSelect = this.onSuggestionSelect.bind(this);
     this.inputRef = React.createRef();
     this.utilDivRef = React.createRef();
@@ -36,6 +37,10 @@ export default class AutoCompleteInput extends Component {
     };
   }
 
+  handleOnPaste(e) {
+    if (this.props.onPaste) this.props.onPaste(e.clipboardData ? e.clipboardData.getData('Text') : '');
+  }
+
   handleKeyUp(e) {
     if (e.keyCode === KEYS.ENTER && this.state.activeIndex !== null) {
       const selectedSuggestion = this.props.suggestions[this.state.activeIndex];
@@ -51,7 +56,8 @@ export default class AutoCompleteInput extends Component {
     if (this.props.delimiters.indexOf(e.keyCode) !== -1 && !e.shiftKey) {
       let selectedValue = this.props.value;
       // by right it should be key in the range of 48 - 90
-      if (e.keyCode === KEYS.COMMA) selectedValue = selectedValue.substr(0, selectedValue.length - 1);
+      if (this.props.delimiters.indexOf(e.keyCode) !== -1 && e.keyCode !== KEYS.ENTER)
+        selectedValue = selectedValue.substr(0, selectedValue.length - 1);
       if (selectedValue) {
         this.props.onSelect({ value: selectedValue });
         this.setState({ activeIndex: null });
@@ -108,6 +114,7 @@ export default class AutoCompleteInput extends Component {
               onChange={e => this.props.onChange(e.target.value)}
               onKeyUp={this.handleKeyUp}
               onKeyDown={this.handleKeyDown}
+              onPaste={this.handleOnPaste}
               onBlur={() => this.setState({ activeIndex: null })}
             />
             <div ref={this.utilDivRef} className="React_autocomplete_label__input-field" style={this.utilDivStyle}>
@@ -151,6 +158,7 @@ AutoCompleteInput.propTypes = {
   lastRowWidth: PropTypes.number,
   lastSelectedLabelsIndex: PropTypes.number,
   onChange: PropTypes.func.isRequired,
+  onPaste: PropTypes.func,
   onRemove: PropTypes.func,
   onSelect: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
