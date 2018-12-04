@@ -35,6 +35,7 @@ var AutoCompleteLabel = function (_Component) {
         onChange: this.props.onInputChange,
         onSelect: this.props.onSelect,
         onRemove: this.props.onRemove,
+        onPaste: this.props.onPaste,
         lastSelectedLabelsIndex: this.lastSelectedLabelsIndex,
         value: this.props.inputValue,
         suggestions: this.props.suggestions,

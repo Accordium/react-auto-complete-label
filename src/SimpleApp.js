@@ -16,6 +16,7 @@ export default class SimpleApp extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.onRemove = this.onRemove.bind(this);
+    this.onPaste = this.onPaste.bind(this);
     this.container = React.createRef();
   }
 
@@ -45,6 +46,10 @@ export default class SimpleApp extends Component {
 
   onChange(value) {
     this.setState({ value });
+  }
+
+  onPaste(value) {
+    console.log('onpaste: ', value)
   }
 
   onRemove(arrayIndex) {
@@ -79,11 +84,11 @@ export default class SimpleApp extends Component {
           onInputChange={this.onChange}
           onSelect={this.onSelect}
           onRemove={this.onRemove}
+          onPaste={this.onPaste}
           selectedLabels={this.state.selectedLabels}
           suggestions={this.state.suggestions}
           containerWidth={this.state.containerWidth}
           lastRowWidth={this.state.lastRowWidth}
-          readOnly
         />
       </div>
     );

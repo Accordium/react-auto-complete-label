@@ -21,6 +21,7 @@ var AutoCompleteInput = function (_Component) {
     };
     _this.handleKeyUp = _this.handleKeyUp.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleOnPaste = _this.handleOnPaste.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onSuggestionSelect = _this.onSuggestionSelect.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.inputRef = React.createRef();
     _this.utilDivRef = React.createRef();
@@ -28,6 +29,11 @@ var AutoCompleteInput = function (_Component) {
   }
 
   _createClass(AutoCompleteInput, [{
+    key: "handleOnPaste",
+    value: function handleOnPaste(e) {
+      if (this.props.onPaste) this.props.onPaste(e.clipboardData ? e.clipboardData.getData('Text') : '');
+    }
+  }, {
     key: "handleKeyUp",
     value: function handleKeyUp(e) {
       if (e.keyCode === KEYS.ENTER && this.state.activeIndex !== null) {
@@ -45,7 +51,7 @@ var AutoCompleteInput = function (_Component) {
 
       if (this.props.delimiters.indexOf(e.keyCode) !== -1 && !e.shiftKey) {
         var selectedValue = this.props.value;
-        if (e.keyCode === KEYS.COMMA) selectedValue = selectedValue.substr(0, selectedValue.length - 1);
+        if (this.props.delimiters.indexOf(e.keyCode) !== -1 && e.keyCode !== KEYS.ENTER) selectedValue = selectedValue.substr(0, selectedValue.length - 1);
 
         if (selectedValue) {
           this.props.onSelect({
@@ -125,6 +131,7 @@ var AutoCompleteInput = function (_Component) {
         },
         onKeyUp: this.handleKeyUp,
         onKeyDown: this.handleKeyDown,
+        onPaste: this.handleOnPaste,
         onBlur: function onBlur() {
           return _this2.setState({
             activeIndex: null
