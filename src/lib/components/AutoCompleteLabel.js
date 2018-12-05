@@ -5,8 +5,17 @@ import AutoCompleteInput from './AutoCompleteInput';
 import LabelContainer from './LabelContainer';
 
 class AutoCompleteLabel extends Component {
+  constructor() {
+    super();
+    this.inputRef = React.createRef();
+    this.focus = this.focus.bind(this)
+  }
   get lastSelectedLabelsIndex() {
     return this.props.selectedLabels.length - 1;
+  }
+
+  focus() {
+    if (this.inputRef.current) this.inputRef.current.focus()
   }
 
   render() {
@@ -23,8 +32,10 @@ class AutoCompleteLabel extends Component {
             onRemove={this.props.onRemove}
             labelClassNames={this.props.selectedLabelClassNames}
             readOnly={this.props.readOnly}
+            focus={this.focus}
           />
           <AutoCompleteInput
+            ref={this.inputRef}
             onChange={this.props.onInputChange}
             onSelect={this.props.onSelect}
             onRemove={this.props.onRemove}
@@ -35,6 +46,7 @@ class AutoCompleteLabel extends Component {
             containerWidth={this.props.containerWidth}
             lastRowWidth={this.props.lastRowWidth}
             readOnly={this.props.readOnly}
+            focus={this.focus}
           />
         </div>
       </LabelContainer>

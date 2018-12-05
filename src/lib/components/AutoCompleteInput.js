@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { KEYS } from './constants';
 
-export default class AutoCompleteInput extends Component {
+class AutoCompleteInput extends Component {
   constructor(props) {
     super(props);
     this.state = { activeIndex: null };
@@ -10,7 +10,6 @@ export default class AutoCompleteInput extends Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleOnPaste = this.handleOnPaste.bind(this);
     this.onSuggestionSelect = this.onSuggestionSelect.bind(this);
-    this.inputRef = React.createRef();
     this.utilDivRef = React.createRef();
   }
 
@@ -38,7 +37,7 @@ export default class AutoCompleteInput extends Component {
   }
 
   handleOnPaste(e) {
-    if (this.props.onPaste) this.props.onPaste(e.clipboardData ? e.clipboardData.getData('Text') : '');
+    if (this.props.onPaste) this.props.onPaste(e);
   }
 
   handleKeyUp(e) {
@@ -95,7 +94,10 @@ export default class AutoCompleteInput extends Component {
   }
 
   onSuggestionSelect(suggestion) {
-    this.props.onSelect({ value: suggestion.value, name: suggestion.name, optionalObject: suggestion.optionalObject });
+    this.props.onSelect(
+      { value: suggestion.value, name: suggestion.name, optionalObject: suggestion.optionalObject },
+      this.props.focus
+    );
     this.setState({ activeIndex: null });
   }
 
@@ -105,7 +107,7 @@ export default class AutoCompleteInput extends Component {
         {!this.props.readOnly && (
           <div className="React_autocomplete_label__auto-complete-input-wrapper" style={this.inputWrapperStyle}>
             <input
-              ref={this.inputRef}
+              ref={this.props.forwardedRef}
               id={this.props.inputId}
               type="text"
               className={`React_autocomplete_label__input-field${!!this.props.error ? ' error' : ''}`}
@@ -149,10 +151,14 @@ export default class AutoCompleteInput extends Component {
   }
 }
 
+export default React.forwardRef((props, ref) => <AutoCompleteInput forwardedRef={ref} {...props} />);
+
 AutoCompleteInput.propTypes = {
   containerWidth: PropTypes.number,
   delimiters: PropTypes.array,
   error: PropTypes.bool,
+  focus: PropTypes.func,
+  forwardedRef: PropTypes.any,
   inputId: PropTypes.string,
   inputMinWidth: PropTypes.number,
   lastRowWidth: PropTypes.number,

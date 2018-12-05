@@ -17,7 +17,10 @@ export default class Label extends Component {
         >
           {this.props.name ? this.props.name : this.props.value}
           {this.showRemoveButton && (
-            <button onClick={() => this.props.onRemove(this.props.labelIndex)} className="React_autocomplete_label__remove-label">
+            <button
+              onClick={() => this.props.onRemove(this.props.labelIndex, this.props.focus)}
+              className="React_autocomplete_label__remove-label"
+            >
               {this.props.removeText}
             </button>
           )}
@@ -29,11 +32,12 @@ export default class Label extends Component {
 
 Label.propTypes = {
   error: PropTypes.bool,
+  focus: PropTypes.func,
   labelClassNames: PropTypes.string,
   labelIndex: PropTypes.number,
+  name: PropTypes.string,
   onRemove: PropTypes.func,
   removeText: PropTypes.string,
-  name: PropTypes.string,
   value: PropTypes.string.isRequired,
 };
 

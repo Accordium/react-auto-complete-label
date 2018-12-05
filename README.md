@@ -20,13 +20,19 @@ export default class SimpleApp extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.onRemove = this.onRemove.bind(this);
+    this.onPaste = this.onPaste.bind(this);
     this.container = React.createRef();
   }
 
   componentDidMount() {
     if (this.lastRowWidth) {
       const listOfSuggestion = [
-        { emailAddress: 'good.thing@accordium.com', firstName: 'Trevor', lastName: 'Noah', optionalObject: { firstName: 'Trevor', lastName: 'Noah' } },
+        {
+          emailAddress: 'good.thing@accordium.com',
+          firstName: 'Trevor',
+          lastName: 'Noah',
+          optionalObject: { firstName: 'Trevor', lastName: 'Noah' },
+        },
         { emailAddress: 'sample@accordium.com', firstName: 'Samnple', lastName: 'Man' },
       ];
       const suggestions = toSuggestions(listOfSuggestion, { nameKey: 'firstName', nameKey2: 'lastName', valueKey: 'emailAddress' });
@@ -51,25 +57,36 @@ export default class SimpleApp extends Component {
     this.setState({ value });
   }
 
-  onRemove(arrayIndex) {
+  onPaste(event) {
+    console.log('onpaste: ', event);
+  }
+
+  onRemove(arrayIndex, focus) {
     this.setState(
       prevState => {
         const selectedLabels = prevState.selectedLabels.slice();
         selectedLabels.splice(arrayIndex, 1);
         return { selectedLabels };
       },
-      () => this.setState({ lastRowWidth: this.lastRowWidth, containerWidth: this.containerWidth })
+      () => {
+        this.setState({ lastRowWidth: this.lastRowWidth, containerWidth: this.containerWidth }, () => {
+          if (focus) focus();
+        });
+      }
     );
   }
 
-  onSelect({ value, name, optionalObject }) {
+  onSelect({ value, name, optionalObject }, focus) {
     this.setState(
       prevState => {
         const selectedLabels = prevState.selectedLabels.slice();
         selectedLabels.push({ value, name, optionalObject });
         return { selectedLabels, suggestions: [], value: '' };
       },
-      () => this.setState({ lastRowWidth: this.lastRowWidth, containerWidth: this.containerWidth })
+      () =>
+        this.setState({ lastRowWidth: this.lastRowWidth, containerWidth: this.containerWidth }, () => {
+          if (focus) focus();
+        })
     );
   }
 
@@ -83,6 +100,7 @@ export default class SimpleApp extends Component {
           onInputChange={this.onChange}
           onSelect={this.onSelect}
           onRemove={this.onRemove}
+          onPaste={this.onPaste}
           selectedLabels={this.state.selectedLabels}
           suggestions={this.state.suggestions}
           containerWidth={this.state.containerWidth}

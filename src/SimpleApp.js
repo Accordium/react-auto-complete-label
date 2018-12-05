@@ -23,7 +23,12 @@ export default class SimpleApp extends Component {
   componentDidMount() {
     if (this.lastRowWidth) {
       const listOfSuggestion = [
-        { emailAddress: 'good.thing@accordium.com', firstName: 'Trevor', lastName: 'Noah', optionalObject: { firstName: 'Trevor', lastName: 'Noah' } },
+        {
+          emailAddress: 'good.thing@accordium.com',
+          firstName: 'Trevor',
+          lastName: 'Noah',
+          optionalObject: { firstName: 'Trevor', lastName: 'Noah' },
+        },
         { emailAddress: 'sample@accordium.com', firstName: 'Samnple', lastName: 'Man' },
       ];
       const suggestions = toSuggestions(listOfSuggestion, { nameKey: 'firstName', nameKey2: 'lastName', valueKey: 'emailAddress' });
@@ -48,29 +53,36 @@ export default class SimpleApp extends Component {
     this.setState({ value });
   }
 
-  onPaste(value) {
-    console.log('onpaste: ', value)
+  onPaste(event) {
+    console.log('onpaste: ', event);
   }
 
-  onRemove(arrayIndex) {
+  onRemove(arrayIndex, focus) {
     this.setState(
       prevState => {
         const selectedLabels = prevState.selectedLabels.slice();
         selectedLabels.splice(arrayIndex, 1);
         return { selectedLabels };
       },
-      () => this.setState({ lastRowWidth: this.lastRowWidth, containerWidth: this.containerWidth })
+      () => {
+        this.setState({ lastRowWidth: this.lastRowWidth, containerWidth: this.containerWidth }, () => {
+          if (focus) focus();
+        });
+      }
     );
   }
 
-  onSelect({ value, name, optionalObject }) {
+  onSelect({ value, name, optionalObject }, focus) {
     this.setState(
       prevState => {
         const selectedLabels = prevState.selectedLabels.slice();
         selectedLabels.push({ value, name, optionalObject });
         return { selectedLabels, suggestions: [], value: '' };
       },
-      () => this.setState({ lastRowWidth: this.lastRowWidth, containerWidth: this.containerWidth })
+      () =>
+        this.setState({ lastRowWidth: this.lastRowWidth, containerWidth: this.containerWidth }, () => {
+          if (focus) focus();
+        })
     );
   }
 
