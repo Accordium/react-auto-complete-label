@@ -26,7 +26,7 @@ var Label = function (_Component) {
         className: "React_autocomplete_label__selected-label".concat(this.props.labelClassNames ? ' ' + this.props.labelClassNames : '').concat(this.props.error ? ' error' : '')
       }, this.props.name ? this.props.name : this.props.value, this.showRemoveButton && React.createElement("button", {
         onClick: function onClick() {
-          return _this.props.onRemove(_this.props.labelIndex);
+          return _this.props.onRemove(_this.props.labelIndex, _this.props.focus);
         },
         className: "React_autocomplete_label__remove-label"
       }, this.props.removeText)));

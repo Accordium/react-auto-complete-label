@@ -23,7 +23,6 @@ var AutoCompleteInput = function (_Component) {
     _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleOnPaste = _this.handleOnPaste.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onSuggestionSelect = _this.onSuggestionSelect.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.inputRef = React.createRef();
     _this.utilDivRef = React.createRef();
     return _this;
   }
@@ -31,7 +30,7 @@ var AutoCompleteInput = function (_Component) {
   _createClass(AutoCompleteInput, [{
     key: "handleOnPaste",
     value: function handleOnPaste(e) {
-      if (this.props.onPaste) this.props.onPaste(e.clipboardData ? e.clipboardData.getData('Text') : '');
+      if (this.props.onPaste) this.props.onPaste(e);
     }
   }, {
     key: "handleKeyUp",
@@ -106,7 +105,7 @@ var AutoCompleteInput = function (_Component) {
         value: suggestion.value,
         name: suggestion.name,
         optionalObject: suggestion.optionalObject
-      });
+      }, this.props.focus);
       this.setState({
         activeIndex: null
       });
@@ -120,7 +119,7 @@ var AutoCompleteInput = function (_Component) {
         className: "React_autocomplete_label__auto-complete-input-wrapper",
         style: this.inputWrapperStyle
       }, React.createElement("input", {
-        ref: this.inputRef,
+        ref: this.props.forwardedRef,
         id: this.props.inputId,
         type: "text",
         className: "React_autocomplete_label__input-field".concat(!!this.props.error ? ' error' : ''),
@@ -203,7 +202,11 @@ var AutoCompleteInput = function (_Component) {
   return AutoCompleteInput;
 }(Component);
 
-export { AutoCompleteInput as default };
+export default React.forwardRef(function (props, ref) {
+  return React.createElement(AutoCompleteInput, Object.assign({
+    forwardedRef: ref
+  }, props));
+});
 AutoCompleteInput.defaultProps = {
   value: '',
   delimiters: [KEYS.ENTER, KEYS.COMMA],

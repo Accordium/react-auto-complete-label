@@ -21,7 +21,8 @@ var SelectedLabels = function (_Component) {
       var nonMandatoryProps = {
         onRemove: !!this.props.readOnly ? undefined : this.props.onRemove,
         removeText: this.props.removeText,
-        labelClassNames: this.props.labelClassNames
+        labelClassNames: this.props.labelClassNames,
+        focus: this.props.focus
       };
       return this.props.selectedLabels.map(function (label, index) {
         return React.createElement(Label, Object.assign({
