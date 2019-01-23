@@ -97,6 +97,19 @@ var AutoCompleteInput = function (_Component) {
       if (e.keyCode === KEYS.BACKSPACE && this.props.value === '') {
         this.props.onRemove && this.props.onRemove(this.props.lastSelectedLabelsIndex);
       }
+
+      if (this.props.delimiters.indexOf(KEYS.TAB) !== -1 && e.keyCode === KEYS.TAB) {
+        var selectedValue = this.props.value;
+
+        if (selectedValue) {
+          this.props.onSelect({
+            value: selectedValue
+          });
+          this.setState({
+            activeIndex: null
+          });
+        }
+      }
     }
   }, {
     key: "onSuggestionSelect",
@@ -209,7 +222,7 @@ export default React.forwardRef(function (props, ref) {
 });
 AutoCompleteInput.defaultProps = {
   value: '',
-  delimiters: [KEYS.ENTER, KEYS.COMMA],
+  delimiters: [KEYS.ENTER, KEYS.COMMA, KEYS.TAB],
   suggestions: [],
   placeholder: '',
   inputId: 'auto-input-field',
