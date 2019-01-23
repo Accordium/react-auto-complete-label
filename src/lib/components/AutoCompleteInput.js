@@ -91,6 +91,14 @@ class AutoCompleteInput extends Component {
     if (e.keyCode === KEYS.BACKSPACE && this.props.value === '') {
       this.props.onRemove && this.props.onRemove(this.props.lastSelectedLabelsIndex);
     }
+    if (this.props.delimiters.indexOf(KEYS.TAB) !== -1 && e.keyCode === KEYS.TAB) {
+      let selectedValue = this.props.value;
+      // by right it should be key in the range of 48 - 90
+      if (selectedValue) {
+        this.props.onSelect({ value: selectedValue });
+        this.setState({ activeIndex: null });
+      }
+    }
   }
 
   onSuggestionSelect(suggestion) {
@@ -177,7 +185,7 @@ AutoCompleteInput.propTypes = {
 
 AutoCompleteInput.defaultProps = {
   value: '',
-  delimiters: [KEYS.ENTER, KEYS.COMMA],
+  delimiters: [KEYS.ENTER, KEYS.COMMA, KEYS.TAB],
   suggestions: [],
   placeholder: '',
   inputId: 'auto-input-field',
