@@ -23,11 +23,41 @@ var AutoCompleteInput = function (_Component) {
     _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleOnPaste = _this.handleOnPaste.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onSuggestionSelect = _this.onSuggestionSelect.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleClickOutside = _this.handleClickOutside.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.utilDivRef = React.createRef();
+    _this._focus = false;
     return _this;
   }
 
   _createClass(AutoCompleteInput, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      document.addEventListener('click', this.handleClickOutside);
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      document.removeEventListener('click', this.handleClickOutside);
+    }
+  }, {
+    key: "handleClickOutside",
+    value: function handleClickOutside(event) {
+      if (event.target.className !== 'React_autocomplete_label__remove-label' && event.target.className !== 'React_autocomplete_label__suggestions' && event.target.className !== 'React_autocomplete_label__input-field' && event.target.className !== 'React_autocomplete_label__input-field error' && event.target.className !== 'React_autocomplete_label__suggestion-item') {
+        var selectedValue = this.props.value;
+
+        if (selectedValue) {
+          this.props.onSelect({
+            value: selectedValue
+          });
+          this.setState({
+            activeIndex: null
+          });
+        }
+      }
+
+      this._focus = false;
+    }
+  }, {
     key: "handleOnPaste",
     value: function handleOnPaste(e) {
       if (this.props.onPaste) this.props.onPaste(e);
@@ -148,6 +178,9 @@ var AutoCompleteInput = function (_Component) {
           return _this2.setState({
             activeIndex: null
           });
+        },
+        onFocus: function onFocus() {
+          return _this2._focus = true;
         }
       }), React.createElement("div", {
         ref: this.utilDivRef,
