@@ -10,7 +10,34 @@ class AutoCompleteInput extends Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleOnPaste = this.handleOnPaste.bind(this);
     this.onSuggestionSelect = this.onSuggestionSelect.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
     this.utilDivRef = React.createRef();
+    this._focus = false;
+  }
+
+  componentDidMount() {
+    document.addEventListener('click', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleClickOutside);
+  }
+
+  handleClickOutside(event) {
+    if (
+      event.target.className !== 'React_autocomplete_label__remove-label' &&
+      event.target.className !== 'React_autocomplete_label__suggestions' &&
+      event.target.className !== 'React_autocomplete_label__input-field' &&
+      event.target.className !== 'React_autocomplete_label__input-field error' &&
+      event.target.className !== 'React_autocomplete_label__suggestion-item'
+    ) {
+      let selectedValue = this.props.value;
+      if (selectedValue) {
+        this.props.onSelect({ value: selectedValue });
+        this.setState({ activeIndex: null });
+      }
+    }
+    this._focus = false;
   }
 
   get inputWrapperStyle() {
@@ -93,7 +120,6 @@ class AutoCompleteInput extends Component {
     }
     if (this.props.delimiters.indexOf(KEYS.TAB) !== -1 && e.keyCode === KEYS.TAB) {
       let selectedValue = this.props.value;
-      // by right it should be key in the range of 48 - 90
       if (selectedValue) {
         this.props.onSelect({ value: selectedValue });
         this.setState({ activeIndex: null });
@@ -126,6 +152,7 @@ class AutoCompleteInput extends Component {
               onKeyDown={this.handleKeyDown}
               onPaste={this.handleOnPaste}
               onBlur={() => this.setState({ activeIndex: null })}
+              onFocus={() => (this._focus = true)}
             />
             <div ref={this.utilDivRef} className="React_autocomplete_label__input-field" style={this.utilDivStyle}>
               {this.props.value}
